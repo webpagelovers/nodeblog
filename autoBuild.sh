@@ -1,8 +1,5 @@
-PRO_DIR="/root/nodeblog"
-echo "start--------------------"
-cd $PRO_DIR
-echo "pull git code"
-git pull
-echo "restart nodeblog"
-pm2 restart nodeblog
-echo "finished-----------------"
+git reset --hard origin/master
+git clean -f
+git pull origin master
+npm install
+npm run test
