@@ -1,30 +1,31 @@
-const http = require('http')
-const createHandler = require('coding-webhook-handler')
-const handler = createHandler({
-    path: '/',
-    token: '123456' // 在 coding 上面可以填写一个 token
-})
+var http = require('http')
+var createHandler = require('github-webhook-handler')
+var handler = createHandler({ path: '/', secret: '123456' })
+// 上面的 secret 保持和 GitHub 后台设置的一致
 
-http.createServer((req, res) => {
-    handler(req, res, function(err) {
+function run_cmd(cmd, args, callback) {
+    var spawn = require('child_process').spawn;
+    var child = spawn(cmd, args);
+    var resp = "";
+
+    child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
+    child.stdout.on('end', function() { callback (resp) });
+}
+
+http.createServer(function (req, res) {
+    handler(req, res, function (err) {
         res.statusCode = 404
         res.end('no such location')
     })
 }).listen(80)
 
-handler.on('error', err => {
+handler.on('error', function (err) {
     console.error('Error:', err.message)
 })
 
-const rumCommand = (cmd, args, callback) => {
-    const child = spawn(cmd, args)
-    let response = ''
-    child.stdout.on('data', buffer => response += buffer.toString())
-    child.stdout.on('end', () => callback(response))
-}
-
-handler.on('push', event => {
-    rumCommand('sh', ['./autoBuild.sh'], txt => {
-        console.log(txt)
-    })
+handler.on('push', function (event) {
+    console.log('Received a push event for %s to %s',
+        event.payload.repository.name,
+        event.payload.ref);
+    run_cmd('sh', ['./autoBuild.sh',event.payload.repository.name], function(text){ console.log(text) });
 })
