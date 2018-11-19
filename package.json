@@ -4,6 +4,7 @@
   "description": "",
   "main": "autoBuild.js",
   "dependencies": {
+    "coding-webhook-handler": "^0.6.1",
     "github-webhook-handler": "^0.7.1"
   },
   "devDependencies": {},
