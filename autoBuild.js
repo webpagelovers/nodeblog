@@ -1,6 +1,6 @@
 var http = require('http')
 var createHandler = require('github-webhook-handler')
-var handler = createHandler({path: '/', secret: '123456'})
+var handler = createHandler({path: '/nodeblog', secret: '123456'})
 
 // 上面的 secret 保持和 GitHub 后台设置的一致
 
