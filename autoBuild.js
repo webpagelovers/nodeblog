@@ -1,7 +1,7 @@
 const http = require('http')
 const createHandler = require('coding-webhook-handler')
 const handler = createHandler({
-    path: '/nodeblog',
+    path: '/',
     token: '123456' // 在 coding 上面可以填写一个 token
 })
 
