@@ -2,13 +2,13 @@
 var http = require('http')
 var spawn = require('child_process').spawn
 var createHandler = require('github-Webhooks-handler')
-var handler = createHandler({ path: '/pushCode', secret: '' }) // 在代码仓库的 Webhooks 选项处配置
+var handler = createHandler({ path: '/', secret: '123456' }) // 在代码仓库的 Webhooks 选项处配置
 http.createServer(function (req, res) {
     handler(req, res, function (err) {
         res.statusCode = 404;
         res.end('no such location')
     })
-}).listen(7777)
+}).listen(80)
 
 handler.on('error', function (err) {
     console.error('Error:', err.message)
