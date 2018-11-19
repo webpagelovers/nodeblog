@@ -2,13 +2,22 @@
   "name": "nodeblog",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "autoBuild.js",
+  "dependencies": {
+    "github-webhook-handler": "^0.7.1"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "node autoBuild"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webpagelovers/nodeblog.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "github-webhook-handler": "^0.7.1"
-  }
+  "bugs": {
+    "url": "https://github.com/webpagelovers/nodeblog/issues"
+  },
+  "homepage": "https://github.com/webpagelovers/nodeblog#readme"
 }
